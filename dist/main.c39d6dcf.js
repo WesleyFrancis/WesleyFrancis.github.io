@@ -38936,7 +38936,7 @@ function () {
 
     this.drawGrid(21, true);
 
-    this._buildBox(new three_1.Vector3(-1, 0, 1));
+    this._buildBox(new three_1.Vector3(0, 0, 1));
 
     this._addControls(); //@ anything that requires render.dom must call after the Render.dom is created.
 
@@ -38945,10 +38945,14 @@ function () {
 
     window.addEventListener('resize', this._resize.bind(this));
     window.addEventListener("DOMContentLoaded", function () {
-      var vbutton = document.querySelector("#viewport > canvas > #VRButton");
-      vbutton.style.position = 'relative';
-      vbutton.style.bottom = '300px';
-    });
+      var vbutton = document.querySelector("#VRButton");
+      var timeLine = document.querySelector('#timeline');
+      var height = timeLine.offsetHeight + 1;
+      vbutton.style.position = 'absolute';
+      vbutton.style.bottom = height + "px"; // vbutton.style.background='#ff0000';
+    }); // vbutton.addEventListener("clicked",()=>{
+    // 	alert("clicked");
+    // })
   };
 
   App.prototype._buildBox = function (location) {
@@ -38956,7 +38960,7 @@ function () {
 
     var geometry = new three_1.BoxBufferGeometry();
     var material = new three_1.MeshStandardMaterial({
-      color: new THREE.Color(0Xaaee32)
+      color: new THREE.Color(0xffffff)
     });
     this.defaultMesh = new three_1.Mesh(geometry, material);
     this.defaultMesh.translateX(location.x);
@@ -38982,6 +38986,8 @@ function () {
   };
 
   App.prototype._addLight = function () {
+    var ambient = new three_1.AmbientLight(new three_1.Color('#ffffff'), 0.2);
+    this.scene.add(ambient);
     var light = new three_1.DirectionalLight(0xffffff, 1);
     light.position.set(1, 1, 1);
     this.scene.add(light);
@@ -38996,6 +39002,7 @@ function () {
     var topWindows = document.querySelector('#topWindows');
     var properties = document.querySelector('#properties');
     var bottomWindows = document.querySelector('#bottomWindows');
+    var timeLine = document.querySelector('#timeline');
     application.style.width = max_width + "px";
     application.style.height = max_height + "px";
     topWindows.style.height = 75 / 100 * max_height + "px";
@@ -39003,6 +39010,9 @@ function () {
     bottomWindows.style.height = 25 / 100 * max_height - 4 + "px"; //4 is the border width of the black separater
 
     bottomWindows.style.width = 100 / 100 * max_width + "px";
+    timeLine.style.width = 100 / 100 * max_width + "px";
+    timeLine.style.height = 25 / 100 * max_height - 4 + "px";
+    timeLine.style.background = "#222222";
     effects.style.height = 100 / 100 * topWindows.offsetHeight + "px";
     effects.style.width = 20 / 100 * max_width + "px";
     viewport.style.height = 100 / 100 * topWindows.offsetHeight + "px";
@@ -39130,7 +39140,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54124" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
