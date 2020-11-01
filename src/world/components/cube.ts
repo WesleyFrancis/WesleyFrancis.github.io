@@ -2,7 +2,7 @@ import { BoxBufferGeometry, Mesh, MeshStandardMaterial, Color, TextureLoader } f
 
 function createCube():Mesh {
     // create geometry
-    const geometry = new BoxBufferGeometry(1,1,1,20,20,20);
+    const geometry = new BoxBufferGeometry(3,1,3,20,20,20);
 
     const textureloader = new TextureLoader()
 

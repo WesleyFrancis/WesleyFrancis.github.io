@@ -36661,7 +36661,7 @@ var three_1 = require("three");
 
 function createCube() {
   // create geometry
-  var geometry = new three_1.BoxBufferGeometry(1, 1, 1, 20, 20, 20);
+  var geometry = new three_1.BoxBufferGeometry(3, 1, 3, 20, 20, 20);
   var textureloader = new three_1.TextureLoader();
   var texture = textureloader.load('./textures/harshbricks-albedo.png');
   var ambient = textureloader.load('./textures/harshbricks-ao2.png');
@@ -38033,7 +38033,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56181" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57367" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
