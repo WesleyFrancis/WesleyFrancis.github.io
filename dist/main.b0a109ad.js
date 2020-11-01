@@ -36661,14 +36661,29 @@ var three_1 = require("three");
 
 function createCube() {
   // create geometry
-  var geometry = new three_1.BoxBufferGeometry(2, 2, 2); // create a default mat
+  var geometry = new three_1.BoxBufferGeometry(1, 1, 1, 20, 20, 20);
+  var textureloader = new three_1.TextureLoader();
+  var texture = textureloader.load('./textures/harshbricks-albedo.png');
+  var ambient = textureloader.load('./textures/harshbricks-ao2.png');
+  var normal = textureloader.load('./textures/harshbricks-normal.png');
+  var roughness = textureloader.load('./textures/harshbricks-normal.png');
+  var height = textureloader.load('./textures/harshbricks-height5-16.png');
+  var metalness = textureloader.load('./textures/metalness.png'); // create a default mat
 
   var material = new three_1.MeshStandardMaterial({
-    color: new three_1.Color(0xffffff)
+    map: texture,
+    metalnessMap: metalness,
+    displacementMap: height,
+    displacementScale: .05,
+    aoMapIntensity: 0.001,
+    aoMap: ambient,
+    normalMap: normal,
+    roughnessMap: roughness,
+    roughness: 0.5
   }); // create a Mesh containing the geometry and material
 
   var cube = new three_1.Mesh(geometry, material);
-  cube.rotation.set(-0.5, 10, 0.8);
+  cube.position.set(0, -0.5, 0);
   return cube;
 }
 
@@ -37893,8 +37908,8 @@ var three_1 = require("three");
 function defLight(scene) {
   var ambient = new three_1.AmbientLight(new three_1.Color('#ffffff'), 0.2);
   scene.add(ambient);
-  var light = new three_1.DirectionalLight(new three_1.Color(0xffffff), 8);
-  light.position.set(10, 10, 10);
+  var light = new three_1.PointLight(new three_1.Color(0xffffff), 8);
+  light.position.set(1, 2, 1);
   scene.add(light);
 }
 
@@ -38018,7 +38033,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59054" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53242" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
